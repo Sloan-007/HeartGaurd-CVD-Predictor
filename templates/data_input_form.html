@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>HeartGaurd- Data Input</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="../static/img/heart-shield.png" rel="icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="../static/vendor/aos/aos.css" rel="stylesheet">
+  <link href="../static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../static/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="../static/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="../static/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="../static/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="../static/css/style.css" rel="stylesheet">
+  
+</head>
+
+<body>
+
+  <!-- ======= Top Bar ======= -->
+  <section id="topbar" class="d-flex align-items-center">
+    <div class="container d-flex justify-content-center justify-content-md-between">
+      <div class="contact-info d-flex align-items-center">
+        <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:contact@example.com">contact@example.com</a></i>
+        <i class="bi bi-phone d-flex align-items-center ms-4"><span>+1 5589 55488 55</span></i>
+      </div>
+      <div class="social-links d-none d-md-flex align-items-center">
+        <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+        <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+        <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+        <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="d-flex align-items-center">
+    <div class="container d-flex justify-content-between">
+
+      <div class="logo">
+        <h1 class="text-light"><a href="{{ url_for('index') }}">HeartGaurd</a></h1>
+      </div>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link scrollto" href="{{ url_for('index') }}">Home</a></li>
+          {% if logged_in %}
+            <li><a class="nav-link scrollto" href="{{ url_for('user_profile') }}">Profile</a></li>
+          {% endif %}
+          <li><a class="nav-link scrollto" href="#about">About</a></li>
+          <li><a class="nav-link scrollto" href="#services">Services</a></li>
+          <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+          {% if logged_in %}
+            <li><a class="nav-link scrollto" href="{{ url_for('logout') }}">Logout</a></li>
+          {% endif %}
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <section class="breadcrumbs">
+      <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+          <h2>Data Input</h2>
+          <ol>
+            <li><a href="{{ url_for('index') }}" class="nav-link scrollto">Home</a></li>
+            <li><a href='#' class="active"> Data Input</a></li>
+          </ol>
+        </div>
+
+      </div>
+    </section><!-- End Breadcrumbs -->
+
+    <section class="inner-page">
+      <div class="card text-center">
+        <div class="card-header">
+          <h5 class="card-title">Enter Your Data</h5>
+        </div>
+        <div class="card-body">
+          <div class="inner-container">
+            <form id="dataInputForm" action="{{ url_for('data_input_form') }}" method="post">
+              <!-- Existing form fields -->
+              <div class="form-group row">
+                <label for="age" class="col-sm-2 col-form-label">Age:</label>
+                <div class="col-sm-3">
+                  <input type="number" class="form-control" name="age" id="age" value="{{ user_risk_data[2] }}" required>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="gender" class="col-sm-2 col-form-label">Gender:</label>
+                <div class="col-sm-3">
+                  <select class="form-control" id="gender" name="gender" required>
+                    <option value="" disabled selected>Select an option</option>
+                    <option value="Male" {{ 'selected' if user_risk_data[3] == 'Male' else '' }}>Male</option>
+                    <option value="Female" {{ 'selected' if user_risk_data[3] == 'Female' else '' }}>Female</option>
+                </select>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="smoking" class="col-sm-2 col-form-label">Smoking Status:</label>
+                <div class="col-sm-3">
+                  <select class="form-control" id="smoking" name="smoking" required>
+                    <option value="" disabled selected>Select an option</option>
+                    <option value=1 {{ 'selected' if user_risk_data[4] == 1 else '' }}>Yes</option>
+                    <option value=0 {{ 'selected' if user_risk_data[4] == 0 else '' }}>No</option>
+                </select>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="sys-bp" class="col-sm-2 col-form-label">Systolic Blood Pressure (mmHg)</label>
+                <div class="col-sm-3">
+                  <input type="number" name="ap_hi" class="form-control" id="ap_hi" placeholder="Enter Systolic Blood Pressure" value="{{ user_risk_data[14] }}" required>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="dias-bp" class="col-sm-2 col-form-label">Diastolic Blood Pressure (mmHg)</label>
+                <div class="col-sm-3">
+                  <input type="number" name="ap_lo" class="form-control" id="ap_lo" placeholder="Enter Diastolic Blood Pressure" value="{{ user_risk_data[15] }}" required>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="cholesterol" class="col-sm-2 col-form-label">Cholesterol Levels:</label>
+                <div class="col-sm-3">
+                  <select class="form-control" id="cholesterol" name="cholesterol" required>
+                    <option value="" disabled selected>Select an option</option>
+                    <option value=1 {{ 'selected' if user_risk_data[5] == 1 else '' }}>Normal</option>
+                    <option value=2 {{ 'selected' if user_risk_data[5] == 2 else '' }}>Above Normal</option>
+                    <option value=3 {{ 'selected' if user_risk_data[5] == 3 else '' }}>Well Above Normal</option>
+                </select>
+                </div>
+                <div class="col-sm-1">
+                  <span class="input-group-text tooltip-icon" id="cholesterol-tooltip" data-bs-toggle="tooltip" data-bs-html="true">
+                    <i class="bi bi-info-circle"></i>
+                  </span>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="diabetes" class="col-sm-2 col-form-label">Diabetes:</label>
+                <div class="col-sm-3">
+                  <select class="form-control" id="diabetes" name="diabetes" required>
+                    <option value="" disabled selected>Select an option</option>
+                    <option value=1 {{ 'selected' if user_risk_data[6] == 1 else '' }}>Normal</option>
+                    <option value=2 {{ 'selected' if user_risk_data[6] == 2 else '' }}>Above Normal</option>
+                    <option value=3 {{ 'selected' if user_risk_data[6] == 3 else '' }}>Well Above Normal</option>
+                </select>
+                </div>
+                <div class="col-sm-1">
+                  <span class="input-group-text tooltip-icon" id="diabetes-tooltip" data-bs-toggle="tooltip" data-bs-html="true">
+                    <i class="bi bi-info-circle"></i>
+                  </span>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="family_history" class="col-sm-2 col-form-label">Height(cm)</label>
+                <div class="col-sm-3">
+                  <input type="number" class="form-control" name="height" id="height" value="{{ user_risk_data[17] }}" required>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="family_history" class="col-sm-2 col-form-label">Weight(kg)</label>
+                <div class="col-sm-3">
+                  <input type="number" class="form-control" name="weight" id="weight" value="{{ user_risk_data[18] }}" required>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="family_history" class="col-sm-2 col-form-label">BMI</label>
+                <div class="col-sm-3">
+                  <input type="number" class="form-control" name="bmi" id="bmi" value="{{ user_risk_data[19] }}" readonly>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="obesity" class="col-sm-2 col-form-label">Obesity:</label>
+                <div class="col-sm-3">
+                  <input type="text" class="form-control" name="obesity" id="obesity" value="{{ user_risk_data[7] }}" readonly>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="physical_activity" class="col-sm-2 col-form-label">Physical Activity</label>
+                <div class="col-sm-3">
+                  <select class="form-control" id="physical_activity" name="physical_activity" value="{{ user_risk_data[8] }}" required>
+                    <option value="" disabled selected>Select an option</option>
+                    <option value=1 {{ 'selected' if user_risk_data[8] == 1 else '' }}>Active</option>
+                    <option value=0 {{ 'selected' if user_risk_data[8] == 0 else '' }}>Not Active</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="diet" class="col-sm-2 col-form-label">Diet:</label>
+                <div class="col-sm-3">
+                  <select class="form-control" id="diet" name="diet" value="{{ user_risk_data[9] }}" required>
+                    <option value="" disabled selected>Select an option</option>
+                    <option value="Healthy" {{ 'selected' if user_risk_data[9] == 'Healthy' else '' }}>Healthy</option>
+                    <option value="Unhealthy" {{ 'selected' if user_risk_data[9] == 'Unhealthy' else '' }}>Unhealthy</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="alcohol" class="col-sm-2 col-form-label">Alcohol Consumption:</label>
+                <div class="col-sm-3">
+                  <select class="form-control" id="alcohol" name="alcohol" value="{{ user_risk_data[10] }}" required>
+                    <option value="" disabled selected>Select an option</option>
+                    <option value=1 {{ 'selected' if user_risk_data[10] == 1 else '' }}>Yes</option>
+                    <option value=0 {{ 'selected' if user_risk_data[10] == 0 else '' }}>No</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="stress" class="col-sm-2 col-form-label">Stress:</label>
+                <div class="col-sm-3">
+                  <select class="form-control" id="stress" name="stress" required>
+                    <option value="" disabled selected>Select an option</option>
+                    <option value="Yes" {{ 'selected' if user_risk_data[11] == 'Yes' else '' }}>Yes</option>
+                    <option value="No" {{ 'selected' if user_risk_data[11] == 'No' else '' }}>No</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="anxiety" class="col-sm-2 col-form-label">Anxiety:</label>
+                <div class="col-sm-3">
+                  <select class="form-control" id="anxiety" name="anxiety" required>
+                    <option value="" disabled selected>Select an option</option>
+                    <option value="Yes" {{ 'selected' if user_risk_data[12] == 'Yes' else '' }}>Yes</option>
+                    <option value="No" {{ 'selected' if user_risk_data[12] == 'No' else '' }}>No</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="depression" class="col-sm-2 col-form-label">Depression:</label>
+                <div class="col-sm-3">
+                  <select class="form-control" id="depression" name="depression" required>
+                    <option value="" disabled selected>Select an option</option>
+                    <option value="Yes" {{ 'selected' if user_risk_data[13] == 'Yes' else '' }}>Yes</option>
+                    <option value="No" {{ 'selected' if user_risk_data[13] == 'No' else '' }}>No</option>
+                </select>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <div class="col-sm-5">
+                  <a class="btn btn-secondary" href="{{ url_for('index') }}">Back</a>
+                  <button type="submit" class="btn btn-success">Confirm</button>
+                </div>
+              </div>
+            
+            </form>
+          </div>
+          
+        </div>
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+
+    <div class="footer-top">
+
+      <div class="row  justify-content-center">
+        <div class="col-lg-6">
+          <h3>HeartGaurd</h3>
+          <p>A Healthy Heart can lead you to long and joyful life.</p>
+        </div>
+      </div>
+
+      <div class="row footer-newsletter justify-content-center">
+        <div class="col-lg-6">
+          <form action="" method="post">
+            <input type="email" name="email" placeholder="Enter your Email"><input type="submit" value="Subscribe">
+          </form>
+        </div>
+      </div>
+
+        <div class="social-links">
+          <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+          <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+          <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+          <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+          <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="container footer-bottom clearfix">
+    </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="../static/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="../static/vendor/aos/aos.js"></script>
+  <script src="../static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../static/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="../static/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="../static/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="../static/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="../static/js/main.js"></script>
+  <script>
+    // Initialize Bootstrap tooltip with HTML content
+    var tooltipTriggerEl = document.getElementById('diabetes-tooltip');
+    var tooltip = new bootstrap.Tooltip(tooltipTriggerEl, {
+        title: "Normal: Fasting blood sugar less than 100 mg/dL (5.6 mmol/L).<br>Above Normal: Fasting blood sugar level from 100 to 125 mg/dL (5.6 to 6.9 mmol/L).<br>Well Above Normal: Fasting blood sugar level 126 mg/dL (7 mmol/L) or higher.",
+        html: true
+    });
+    var tooltipTriggerEl = document.getElementById('cholesterol-tooltip');
+    var tooltip = new bootstrap.Tooltip(tooltipTriggerEl, {
+        title: "Normal: Less than 200 mg/dL.<br>Above Normal: 200 to 239 mg/dL.<br>Well Above Normal: At or above 240 mg/dL.",
+        html: true
+    });
+</script>
+</body>
+
+</html>

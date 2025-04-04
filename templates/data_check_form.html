@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>HeartGaurd- Confirm Your Data</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="../static/img/heart-shield.png" rel="icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="../static/vendor/aos/aos.css" rel="stylesheet">
+  <link href="../static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../static/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="../static/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="../static/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="../static/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="../static/css/style.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <!-- ======= Top Bar ======= -->
+  <section id="topbar" class="d-flex align-items-center">
+    <div class="container d-flex justify-content-center justify-content-md-between">
+      <div class="contact-info d-flex align-items-center">
+        <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:contact@example.com">contact@example.com</a></i>
+        <i class="bi bi-phone d-flex align-items-center ms-4"><span>+1 5589 55488 55</span></i>
+      </div>
+      <div class="social-links d-none d-md-flex align-items-center">
+        <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+        <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+        <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+        <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="d-flex align-items-center">
+    <div class="container d-flex justify-content-between">
+
+      <div class="logo">
+        <h1 class="text-light"><a href="{{ url_for('index') }}">HeartGaurd</a></h1>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a href="index.html"><img src="static/img/logo.png" alt="" class="img-fluid"></a>-->
+      </div>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link scrollto" href="{{ url_for('index') }}">Home</a></li>
+          {% if logged_in %}
+            <li><a class="nav-link scrollto" href="{{ url_for('user_profile') }}">Profile</a></li>
+          {% endif %}
+          <li><a class="nav-link scrollto" href="#about">About</a></li>
+          <li><a class="nav-link scrollto" href="#services">Services</a></li>
+          <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+          {% if logged_in %}
+            <li><a class="nav-link scrollto" href="{{ url_for('logout') }}">Logout</a></li>
+          {% endif %}
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <section class="breadcrumbs">
+      <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+          <h2>Check your data</h2>
+          <ol>
+            <li><a href="{{ url_for('index') }}" class="nav-link scrollto">Home</a></li>
+            <li><a href='#'></a>Input Data</a></li>
+            <li><a href='#' class="active">Confirm Data</a></li>
+          </ol>
+        </div>
+
+      </div>
+    </section><!-- End Breadcrumbs -->
+    <section class="inner-page">
+      <div class="card text-center">
+        <div class="card-header">
+          <h5 class="card-title">Confirm Your Data</h5>
+        </div>
+        <div class="card-body">
+          <div class="inner-container">
+            <form action="{{ url_for('predict') }}" method="post">
+              <!-- Existing form fields -->
+              <div class="form-group row">
+                <label for="age" class="col-sm-2 col-form-label">Age:</label>
+                <div class="col-sm-3">
+                  <input type="text" class="form-control" name="age" id="age" value="{{ user_risk_data['age'] }}" readonly>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="gender" class="col-sm-2 col-form-label">Gender:</label>
+                <div class="col-sm-3">
+                  <input type="text" class="form-control" name="gender" id="gender" value="{{ user_risk_data['gender'] }}" readonly>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="smoking" class="col-sm-2 col-form-label">Smoking Status:</label>
+                <div class="col-sm-3">
+                  <input type="text" class="form-control" name="smoking" id="smoking" value="{% if user_risk_data['smoking'] == '1' %}Yes{% else %}No{% endif %}" readonly>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="bp" class="col-sm-2 col-form-label">Systolic Blood Pressure</label>
+                <div class="col-sm-3">
+                  <input type="number"  class="form-control" name="ap_hi" id="ap_hi" value="{{ user_risk_data['ap_hi'] }}" readonly>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="bp" class="col-sm-2 col-form-label">Diastolic Blood Pressure</label>
+                <div class="col-sm-3">
+                  <input type="number"  class="form-control" name="ap_lo" id="ap_lo" value="{{ user_risk_data['ap_lo'] }}" readonly>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="bp" class="col-sm-2 col-form-label">Hypertension</label>
+                <div class="col-sm-3">
+                  <input type="text"  class="form-control" name="hypertension" id="hypertension" value="{% if user_risk_data['hypertension'] == '1' %}Yes{% else %}No{% endif %}" readonly>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="cholesterol" class="col-sm-2 col-form-label">Cholesterol Levels:</label>
+                <div class="col-sm-3">
+                  <input type="text" class="form-control" name="cholesterol" id="cholesterol" value="{% if user_risk_data['cholesterol'] == '1' %}Normal{% elif user_risk_data['cholesterol'] == '2' %}Above Normal{% elif user_risk_data['cholesterol'] == '3' %}Well Above Normal{% endif %}" readonly>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="diabetes" class="col-sm-2 col-form-label">Diabetes:</label>
+                <div class="col-sm-3">
+                  <input type="text" class="form-control" name="diabetes" id="diabetes" value="{% if user_risk_data['diabetes'] == '1' %}Normal{% elif user_risk_data['diabetes'] == '2' %}Above Normal{% elif user_risk_data['diabetes'] == '3' %}Well Above Normal{% endif %}" readonly>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="family_history" class="col-sm-2 col-form-label">Height(cm)</label>
+                <div class="col-sm-3">
+                  <input type="text" class="form-control" name="height" id="height" value="{{ user_risk_data['height'] }}" readonly>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="family_history" class="col-sm-2 col-form-label">Weight(kg)</label>
+                <div class="col-sm-3">
+                  <input type="text" class="form-control" name="weight" id="weight" value="{{ user_risk_data['weight'] }}" readonly>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="family_history" class="col-sm-2 col-form-label">BMI</label>
+                <div class="col-sm-3">
+                  <input type="text" class="form-control" name="bmi" id="bmi" value="{{ user_risk_data['bmi'] }}" readonly>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="obesity" class="col-sm-2 col-form-label">Obesity:</label>
+                <div class="col-sm-3">
+                  <input type="text" class="form-control" name="obesity" id="obesity" value="{{ user_risk_data['obesity']}}" readonly>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="physical_activity" class="col-sm-2 col-form-label">Physical Activity</label>
+                <div class="col-sm-3">
+                  <input type="text" class="form-control" name="physical_activity" id="physical_activity" value="{% if user_risk_data['physical_activity'] == '1' %}Active{% else %}Not Active{% endif %}" readonly>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="diet" class="col-sm-2 col-form-label">Diet:</label>
+                <div class="col-sm-3">
+                  <input type="text" class="form-control" name="diet" id="diet" value="{{ user_risk_data['diet'] }}" readonly>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="alcohol" class="col-sm-2 col-form-label">Alcohol Consumption:</label>
+                <div class="col-sm-3">
+                  <input type="text" class="form-control" name="alcohol" id="alcohol" value="{% if user_risk_data['alcohol'] == '1' %}Yes{% else %}No{% endif %}" readonly>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="stress" class="col-sm-2 col-form-label">Stress:</label>
+                <div class="col-sm-3">
+                  <input type="text" class="form-control" name="stress" id="stress" value="{{ user_risk_data['stress'] }}" readonly>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="anxiety" class="col-sm-2 col-form-label">Anxiety:</label>
+                <div class="col-sm-3">
+                  <input type="text" class="form-control" name="anxiety" id="anxiety" value="{{ user_risk_data['anxiety'] }}" readonly>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="depression" class="col-sm-2 col-form-label">Depression:</label>
+                <div class="col-sm-3">
+                  <input type="text" class="form-control" name="depression" id="depression" value="{{ user_risk_data['depression'] }}" readonly>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <div class="col-sm-5">
+                  <a class="btn btn-secondary" href="{{ url_for('data_input_form') }}">Back</a>
+                  <button type="submit" class="btn btn-success">Calculate</button>
+                </div>
+              </div>
+            
+            </form>
+          </div>
+          
+        </div>
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+
+    <div class="footer-top">
+
+      <div class="row  justify-content-center">
+        <div class="col-lg-6">
+          <h3>HeartGaurd</h3>
+          <p>A Healthy Heart can lead you to long and joyful life.</p>
+        </div>
+      </div>
+
+      <div class="row footer-newsletter justify-content-center">
+        <div class="col-lg-6">
+          <form action="" method="post">
+            <input type="email" name="email" placeholder="Enter your Email"><input type="submit" value="Subscribe">
+          </form>
+        </div>
+      </div>
+
+        <div class="social-links">
+          <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+          <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+          <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+          <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+          <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="container footer-bottom clearfix">
+    </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="../static/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="../static/vendor/aos/aos.js"></script>
+  <script src="../static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../static/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="../static/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="../static/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="../static/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="../static/js/main.js"></script>
+  
+</body>
+
+</html>

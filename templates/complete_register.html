@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="utf-8">
+            <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+            <title>HeartGaurd- Confirm Your Data</title>
+            <meta content="" name="description">
+            <meta content="" name="keywords">
+
+            <!-- Favicons -->
+            <link href="../static/img/heart-shield.png" rel="icon">
+
+            <!-- Google Fonts -->
+            <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+            <!-- Vendor CSS Files -->
+            <link href="../static/vendor/aos/aos.css" rel="stylesheet">
+            <link href="../static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+            <link href="../static/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+            <link href="../static/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+            <link href="../static/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+            <link href="../static/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+            <!-- Template CSS Files -->
+            <link href="../static/css/comp_reg_style.css" rel="stylesheet"/>
+            <link href="../static/css/style.css" rel="stylesheet">
+            <link href="../static/css/profile.css" rel="stylesheet">
+        </head>
+        <body>
+            <!-- ======= Top Bar ======= -->
+            <section id="topbar" class="d-flex align-items-center">
+                <div class="container d-flex justify-content-center justify-content-md-between">
+                    <div class="contact-info d-flex align-items-center">
+                        <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:contact@example.com">contact@example.com</a></i>
+                        <i class="bi bi-phone d-flex align-items-center ms-4"><span>+1 5589 55488 55</span></i>
+                    </div>
+                    <div class="social-links d-none d-md-flex align-items-center">
+                        <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+                        <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ======= Header ======= -->
+            <header id="header" class="d-flex align-items-center">
+                <div class="container d-flex justify-content-between">
+
+                    <div class="logo">
+                        <h1 class="text-light"><a href="{{ url_for('index') }}">HeartGaurd</a></h1>
+                    </div>
+
+                    <nav id="navbar" class="navbar">
+                        <ul>
+                            <li><a class="nav-link scrollto active" href="{{ url_for('index') }}">Home</a></li>
+                            {% if logged_in %}
+                                <li><a class="nav-link scrollto" href="{{ url_for('logout') }}">Logout</a></li>
+                            {% endif %}
+                        </ul>
+                        <i class="bi bi-list mobile-nav-toggle"></i>
+                    </nav><!-- .navbar -->
+
+                </div>
+            </header><!-- End Header -->
+
+            <main id="main">
+
+                <!-- ======= Breadcrumbs ======= -->
+                <section class="breadcrumbs">
+                    <div class="container">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h2>Complete your Registration</h2>
+                            <ol>
+                                <li><a href="{{ url_for('index') }}">Home</a></li>
+                                <li>Registration Form</li>
+                            </ol>
+                        </div>
+                    </div>
+                </section><!-- End Breadcrumbs -->
+                
+                <section class="inner-page">
+                    <div class="container-xl px-4 mt-4">
+                        <div class="row">
+                            <div class="col-xl-14">
+                                <div class="card mb-4">
+                                    <div class="card-header">Personal Details</div>
+                                    <div class="card-body">
+                                        <form id="dataInputForm" action="{{ url_for('complete_register') }}" method="post">
+                                            <div class="row gx-3 mb-3">
+                                                <div class="mb-3">
+                                                    <label class="small mb-1" for="username">Username</label>
+                                                    <input class="form-control" id="username" name="username" type="text" value="{{ user_data[3] }}" readonly>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label class="small mb-1" for="firstname">First Name</label>
+                                                    <input class="form-control" id="firstname" name="firstname" type="text" placeholder="Enter your First Name">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label class="small mb-1" for="lastname">Last Name</label>
+                                                    <input class="form-control" id="lastname" name="lastname" type="text" placeholder="Enter your Last Name">
+                                                </div>
+                                            </div>
+                                            <div class="row gx-3 mb-3">
+                                                <div class="col-md-6">
+                                                    <label class="small mb-1" for="gender">Gender</label>
+                                                    <select class="form-control" id="gender" name="gender" required>
+                                                        <option value="" disabled selected>Select</option>
+                                                        <option value="Male">Male</option>
+                                                        <option value="Female">Female</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label class="small mb-1" for="age">Age</label>
+                                                    <input class="form-control" id="age" name="age" type="number" placeholder="Enter your age">
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="small mb-1" for="email">Email Address</label>
+                                                <input class="form-control" id="email" name="email" type="email" value="{{ user_data[4] }}" readonly>
+                                            </div>
+                                            <div class="card mb-4">
+                                                <div class="card-header">Contact Details</div>
+                                                <div class="card-body">
+                                                        <div class="row gx-3 mb-3">
+                                                            <div class="col-md-6">
+                                                                <label class="small mb-1" for="phone">Phone number</label>
+                                                                <input class="form-control" id="phone" name="phone" type="tel" placeholder="Enter your phone number">
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <label class="small mb-1" for="postcode">Postcode</label>
+                                                                <input class="form-control" id="postcode" name="postcode" type="text" placeholder="Enter your postcode">
+                                                            </div>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label class="small mb-1" for="address1">Address Line 1</label>
+                                                            <input class="form-control" id="address1" name="address1" type="text" placeholder="Enter your Address Line 1">
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label class="small mb-1" for="address2">Address Line 2</label>
+                                                            <input class="form-control" id="address2" name="address2" type="text" placeholder="Enter your Address Line 2">
+                                                        </div>
+                                                        <div class="row gx-3 mb-3">
+                                                            <div class="col-md-6">
+                                                                <label class="small mb-1" for="city">City</label>
+                                                                <input class="form-control" id="city" name="city" type="text" placeholder="Enter your city">
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <label class="small mb-1" for="country">Country</label>
+                                                                <select class="form-control" id="country" name="country" required>
+                                                                    <option value="" disabled selected>Select Country</option>
+                                                                    <option value="United Kingdom">United Kingdom</option>
+                                                                    <option value="India">India</option>
+                                                                    <option value="Spain">Spain</option>
+                                                                    <option value="Portugal">Portugal</option>
+                                                                    <option value="France">France</option>
+                                                                    <option value="Sweden">Sweden</option>
+                                                                    <option value="Australia">Australia</option>
+                                                                    <option value="Japan">Japan</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                </div>
+                                            </div>
+                                            <div class="card mb-4">
+                                                <div class="card-header">Health Details</div>
+                                                <div class="card-body">
+                                                        <div class="row gx-3 mb-3">
+                                                            <div class="col-md-6">
+                                                                <label class="small mb-1" for="smoking">Smoking?</label>
+                                                                <select class="form-control" id="smoking" name="smoking" required>
+                                                                    <option value="" disabled selected>Select</option>
+                                                                    <option value=1>Yes</option>
+                                                                    <option value=0>No</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <label class="small mb-1" for="diabetes">Diabetes</label>
+                                                                <select class="form-control" id="diabetes" name="diabetes" required>
+                                                                    <option value="" disabled selected>Select</option>
+                                                                    <option value=1>Normal</option>
+                                                                    <option value=2>Above Normal</option>
+                                                                    <option value=3>Well Above Normal</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-sm-1">
+                                                                <span class="input-group-text tooltip-icon" id="diabetes-tooltip" data-bs-toggle="tooltip" data-bs-html="true">
+                                                                  <i class="bi bi-info-circle"></i>
+                                                                </span>
+                                                              </div>
+                                                        </div>
+                                                        <div class="row gx-3 mb-3">
+                                                            <div class="col-md-6">
+                                                                <label class="small mb-1" for="height">Height(cm)</label>
+                                                                <input class="form-control" id="height" name="height" type="number" placeholder="Enter your Height">
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <label class="small mb-1" for="weight">Weight(Kg)</label>
+                                                                <input class="form-control" id="weight" name="weight" type="number" placeholder="Enter your Weight">
+                                                            </div>
+                                                        </div>
+                                                        <div class="row gx-3 mb-3">
+                                                            <div class="col-md-6">
+                                                                <label class="small mb-1" for="diet">Diet</label>
+                                                                <select class="form-control" id="diet" name="diet" required>
+                                                                    <option value="" disabled selected>Select</option>
+                                                                    <option value="Healthy">Healthy</option>
+                                                                    <option value="Unhealthy">Unhealthy</option>
+                                                                  </select>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <label class="small mb-1" for="physical_activity">Physically Active</label>
+                                                                <select class="form-control" id="physical_activity" name="physical_activity" required>
+                                                                    <option value="" disabled selected>Select</option>
+                                                                    <option value=1>Active</option>
+                                                                    <option value=0>Not Active</option>
+                                                                  </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row gx-3 mb-3">
+                                                            <div class="col-md-6">
+                                                                <label class="small mb-1" for="stress">Stress Levels</label>
+                                                                <select class="form-control" id="stress" name="stress" required>
+                                                                    <option value="" disabled selected>Select</option>
+                                                                    <option value="Yes">Yes</option>
+                                                                    <option value="No">No</option>
+                                                                  </select>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <label class="small mb-1" for="alcohol">Alcohol Consumption</label>
+                                                                <select class="form-control" id="alcohol" name="alcohol" required>
+                                                                    <option value="" disabled selected>Select</option>
+                                                                    <option value=1>Yes</option>
+                                                                    <option value=0>No</option>
+                                                                  </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row gx-3 mb-3">
+                                                            <div class="col-md-6">
+                                                                <label class="small mb-1" for="anxiety">Anxiety</label>
+                                                                <select class="form-control" id="anxiety" name="anxiety" required>
+                                                                    <option value="" disabled selected>Select</option>
+                                                                    <option value="Yes">Yes</option>
+                                                                    <option value="No">No</option>
+                                                                  </select>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <label class="small mb-1" for="depression">Depression</label>
+                                                                <select class="form-control" id="depression" name="depression" required>
+                                                                    <option value="" disabled selected>Select</option>
+                                                                    <option value="Yes">Yes</option>
+                                                                    <option value="No">No</option>
+                                                                  </select>
+                                                            </div>
+                                                        </div>
+                                                </div>
+                                            </div>
+                                            <button class="btn btn-primary" type="submit">Complete Registration</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main><!-- End #main -->
+        
+            <!-- ======= Footer ======= -->
+            <footer id="footer">
+        
+            <div class="footer-top">
+        
+                <div class="row  justify-content-center">
+                <div class="col-lg-6">
+                    <h3>HeartGaurd</h3>
+                    <p>A Healthy Heart can lead you to long and joyful life.</p>
+                </div>
+                </div>
+        
+                <div class="social-links">
+                    <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+                    <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+                    <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+                    <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+                    <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+                </div>
+        
+                </div>
+            </div>
+        
+            <div class="container footer-bottom clearfix">
+            </div>
+            </footer>End Footer
+        
+            <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+        
+            <!-- Vendor JS Files -->
+            <script src="../static/vendor/purecounter/purecounter_vanilla.js"></script>
+            <script src="../static/vendor/aos/aos.js"></script>
+            <script src="../static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+            <script src="../static/vendor/glightbox/js/glightbox.min.js"></script>
+            <script src="../static/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+            <script src="../static/vendor/swiper/swiper-bundle.min.js"></script>
+            <script src="../static/vendor/php-email-form/validate.js"></script>
+        
+            <!-- Template Main JS File -->
+            <script src="../static/js/main.js"></script>
+            <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+            <script>
+                // Initialize Bootstrap tooltip with HTML content
+                var tooltipTriggerEl = document.getElementById('diabetes-tooltip');
+                var tooltip = new bootstrap.Tooltip(tooltipTriggerEl, {
+                    title: "Normal: Fasting blood sugar less than 100 mg/dL (5.6 mmol/L).<br>Above Normal: Fasting blood sugar level from 100 to 125 mg/dL (5.6 to 6.9 mmol/L).<br>Well Above Normal: Fasting blood sugar level 126 mg/dL (7 mmol/L) or higher.",
+                    html: true
+                });
+                var tooltipTriggerEl = document.getElementById('cholesterol-tooltip');
+                var tooltip = new bootstrap.Tooltip(tooltipTriggerEl, {
+                    title: "Normal: Less than 200 mg/dL.<br>Above Normal: 200 to 239 mg/dL.<br>Well Above Normal: At or above 240 mg/dL.",
+                    html: true
+                });
+            </script>
+        </body>
+    </html>

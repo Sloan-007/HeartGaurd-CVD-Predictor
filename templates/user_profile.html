@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>HeartGaurd- Profile</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="../static/img/heart-shield.png" rel="icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="../static/vendor/aos/aos.css" rel="stylesheet">
+  <link href="../static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../static/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="../static/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="../static/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="../static/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="../static/css/style.css" rel="stylesheet">
+  <link href="../static/css/profile.css" rel="stylesheet">
+</head>
+<body>
+    <!-- ======= Top Bar ======= -->
+  <section id="topbar" class="d-flex align-items-center">
+    <div class="container d-flex justify-content-center justify-content-md-between">
+      <div class="contact-info d-flex align-items-center">
+        <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:contact@example.com">contact@example.com</a></i>
+        <i class="bi bi-phone d-flex align-items-center ms-4"><span>+1 5589 55488 55</span></i>
+      </div>
+      <div class="social-links d-none d-md-flex align-items-center">
+        <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+        <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+        <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+        <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="d-flex align-items-center">
+    <div class="container d-flex justify-content-between">
+
+      <div class="logo">
+        <h1 class="text-light"><a href="{{ url_for('index') }}">HeartGaurd</a></h1>
+      </div>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link scrollto" href="{{ url_for('index') }}">Home</a></li>
+          {% if logged_in %}
+            <li><a class="nav-link scrollto active" href="{{ url_for('user_profile') }}">Profile</a></li>
+            <li><a class="nav-link scrollto" href="{{ url_for('logout') }}">Logout</a></li>
+          {% else %}
+            <li><a class="nav-link scrollto" href="{{ url_for('login') }}">Login</a></li>
+          {% endif %}
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <section class="breadcrumbs">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <h2>Profile</h2>
+                <ol>
+                    <li><a>Home</a></li>
+                    <li><a class="active" href="{{ url_for('user_profile') }}">Profile</a></li>
+                </ol>
+            </div>
+        </div>
+    </section><!-- End Breadcrumbs -->
+    <section class="inner-page">
+        <div class="container-xl px-4 mt-4">
+            <nav class="nav nav-borders">
+                <a class="nav-link active" href="{{ url_for('user_profile') }}">Profile</a>
+                <a class="nav-link" href="{{ url_for('user_dashboard') }}" >Dashboard</a>
+                <a class="nav-link" href="{{ url_for('change_password') }}" >Change Password</a>
+            </nav>
+            <hr class="mt-0 mb-4">
+            <div class="row">
+                <div class="col-xl-4">
+                    <div class="card mb-4 mb-xl-0">
+                        <div class="card-header">Profile Picture</div>
+                        <div class="card-body text-center">
+                            <img class="img-account-profile rounded-circle mb-2" src="http://bootdey.com/img/Content/avatar/avatar1.png" alt>
+                            <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
+                            <button class="btn btn-primary" type="button">Upload new image</button>
+                        </div>
+                        <div class="card-body">
+                            <form>
+                                <div class="mb-3">
+                                    <label class="small mb-1" for="username">Username</label>
+                                    <input class="form-control" id="username" name="username" type="text" value="{{ user_data[3] }}" readonly>
+                                </div>
+                                <div class="row gx-3 mb-3">
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="firstname">First Name</label>
+                                        <input class="form-control" id="firstname" name="firstname" type="text" value="{{ user_data[1] }}" readonly>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="lastname">Last Name</label>
+                                        <input class="form-control" id="lastname" name="lastname" type="text" value="{{ user_data[2] }}" readonly>
+                                    </div>
+                                </div>
+                                <div class="row gx-3 mb-3">
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="gender">Gender</label>
+                                        <input class="form-control" id="gender" name="gender" type="text" value="{{ user_risk_data[3] }}" readonly>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="age">Age</label>
+                                        <input class="form-control" id="age" name="age" type="text" value="{{ user_risk_data[2] }}" readonly>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="small mb-1" for="email">Email address</label>
+                                    <input class="form-control" id="email" name="email" type="email" value="{{ user_data[4] }}" readonly>
+                                </div>
+                                <button class="btn btn-primary" type="button">Save changes</button>
+                            </form>    
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-8">
+                    <div class="card mb-4">
+                        <div class="card-header">Contact Details</div>
+                        <div class="card-body">
+                            <form>
+                                <div class="row gx-3 mb-3">
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="phone">Phone number</label>
+                                        <input class="form-control" id="phone" name="phone" type="tel" value="{{ user_data[6] }}" readonly>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="postcode">Postcode</label>
+                                        <input class="form-control" id="postcode" name="postcode" type="text" value="{{ user_data[8] }}" readonly>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="small mb-1" for="address">Address</label>
+                                    <input class="form-control" id="address" name="address" type="text" value="{{ user_data[7] }}" readonly>
+                                </div>
+                                <div class="row gx-3 mb-3">
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="city">City</label>
+                                        <input class="form-control" id="city" name="city" type="text" value="{{ user_data[9] }}" readonly>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="country">Country</label>
+                                        <input class="form-control" id="country" name="country" type="text" value="{{ user_data[10] }}" readonly>
+                                    </div>
+                                </div>
+                                <button class="btn btn-primary" type="button">Save changes</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="card mb-4">
+                        <div class="card-header">Health Details</div>
+                        <div class="card-body">
+                            <form>
+                                <div class="row gx-3 mb-3">
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="smoking">Smoking?</label>
+                                        <input class="form-control" id="smoking" name="smoking" type="text" value="{% if user_risk_data[4] == 1 %}Yes{% else %}No{% endif %}" readonly>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="diabetes">Diabetes</label>
+                                        <input class="form-control" id="diabetes" name="diabetes" type="text" value="{% if user_risk_data[6] == 1 %}Normal{% elif user_risk_data[6] == 2 %}Above Normal{% elif user_risk_data[6] == 3 %}Well Above Normal{% endif %}" readonly>
+                                    </div>
+                                </div>
+                                <div class="row gx-3 mb-3">
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="height">Height(cm)</label>
+                                        <input class="form-control" id="height" name="height" type="number" value="{{ user_risk_data[17] }}" readonly>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="weight">Weight(kg)</label>
+                                        <input class="form-control" id="weight" name="weight" type="number" value="{{ user_risk_data[18] }}" readonly>
+                                    </div>
+                                </div>
+                                <div class="row gx-3 mb-3">
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="bmi">Body Mass Index(BMI)</label>
+                                        <input class="form-control" id="bmi" name="bmi" type="number" value="{{ user_risk_data[19] }}" readonly>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="obesity">Obesity</label>
+                                        <input class="form-control" id="obesity" name="obesity" type="text" value="{{ user_risk_data[7] }}" readonly>
+                                    </div>
+                                </div>
+                                <div class="row gx-3 mb-3">
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="physical_activity">Physical Activity</label>
+                                        <input class="form-control" id="physical_activity" name="physical_activity" type="text" value="{% if user_risk_data[8] == 1 %}Active{% else %}Not Active{% endif %}" readonly>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="diet">Diet</label>
+                                        <input class="form-control" id="diet" name="diet" type="text" value="{{ user_risk_data[9] }}" readonly>
+                                    </div>
+                                </div>
+                                <div class="row gx-3 mb-3">
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="alcohol">Alcohol Consumption</label>
+                                        <input class="form-control" id="alcohol" name="alcohol" type="text" value="{% if user_risk_data[10] == 1 %}Yes{% else %}No{% endif %}" readonly>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="stress">Stress</label>
+                                        <input class="form-control" id="stress" name="stress" type="text" value="{{ user_risk_data[11] }}" readonly>
+                                    </div>
+                                </div>
+                                <div class="row gx-3 mb-3">
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="anxiety">Anxiety</label>
+                                        <input class="form-control" id="anxiety" name="anxiety" type="text" value="{{ user_risk_data[12] }}" readonly>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="small mb-1" for="depression">Depression</label>
+                                        <input class="form-control" id="depression" name="depression" type="text" value="{{ user_risk_data[13] }}" readonly>
+                                    </div>
+                                </div>
+                                <button class="btn btn-primary" type="button">Save changes</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    </main><!-- End #main -->
+        
+        <!-- ======= Footer ======= -->
+        <footer id="footer">
+      
+          <div class="footer-top">
+      
+            <div class="row  justify-content-center">
+              <div class="col-lg-6">
+                <h3>HeartGaurd</h3>
+                <p>A Healthy Heart can lead you to long and joyful life.</p>
+              </div>
+            </div>
+      
+              <div class="social-links">
+                <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+                <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+                <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+                <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+                <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+              </div>
+      
+            </div>
+          </div>
+      
+          <div class="container footer-bottom clearfix">
+          </div>
+        </footer>End Footer
+      
+        <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+      
+        <!-- Vendor JS Files -->
+        <script src="../static/vendor/purecounter/purecounter_vanilla.js"></script>
+        <script src="../static/vendor/aos/aos.js"></script>
+        <script src="../static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="../static/vendor/glightbox/js/glightbox.min.js"></script>
+        <script src="../static/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+        <script src="../static/vendor/swiper/swiper-bundle.min.js"></script>
+        <script src="../static/vendor/php-email-form/validate.js"></script>
+      
+        <!-- Template Main JS File -->
+        <script src="../static/js/main.js"></script>
+        <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
+</html>

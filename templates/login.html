@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>HeartGaurd- Login</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="../static/img/heart-shield.png" rel="icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="../static/vendor/aos/aos.css" rel="stylesheet">
+    <link href="../static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../static/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="../static/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="../static/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="../static/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="../static/css/style.css" rel="stylesheet">
+    <link href="../static/css/login_style.css" rel="stylesheet">
+
+  </head>
+
+  <body>
+
+    <!-- ======= Top Bar ======= -->
+    <section id="topbar" class="d-flex align-items-center">
+      <div class="container d-flex justify-content-center justify-content-md-between">
+        <div class="contact-info d-flex align-items-center">
+          <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:contact@example.com">contact@example.com</a></i>
+          <i class="bi bi-phone d-flex align-items-center ms-4"><span>+1 5589 55488 55</span></i>
+        </div>
+        <div class="social-links d-none d-md-flex align-items-center">
+          <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+          <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+          <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+          <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======= Header ======= -->
+    <header id="header" class="d-flex align-items-center">
+      <div class="container d-flex justify-content-between">
+
+        <div class="logo">
+          <h1 class="text-light"><a href="{{ url_for('index') }}">HeartGaurd</a></h1>
+        </div>
+
+        <nav id="navbar" class="navbar">
+          <ul>
+            <li><a class="nav-link scrollto active" href="{{ url_for('index') }}">Home</a></li>
+            <li><a class="nav-link scrollto" href="#about">About</a></li>
+            <li><a class="nav-link scrollto" href="#services">Services</a></li>
+            <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+            {% if logged_in %}
+              <li><a class="nav-link scrollto" href="{{ url_for('logout') }}">Logout</a></li>
+            {% else %}
+              <li><a class="nav-link scrollto" href="{{ url_for('login') }}">Login</a></li>
+            {% endif %}
+          </ul>
+          <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav><!-- .navbar -->
+
+      </div>
+    </header><!-- End Header -->
+    <main id="main">
+
+      <!-- ======= Breadcrumbs ======= -->
+      <section class="breadcrumbs">
+        <div class="container">
+
+          <div class="d-flex justify-content-between align-items-center">
+            <h2>Login</h2>
+            <ol>
+              <li><a class="nav-link scrollto" href="{{ url_for('index') }}">Home</a></li>
+              <li><a class="active">Login</a></li>
+            </ol>
+          </div>
+
+        </div>
+      </section><!-- End Breadcrumbs -->
+
+      <section class="inner-page">
+        <div class="inner-container">
+          <div class="main">  	
+            <div class="wrapper">
+              <div class="title-text">
+                <div class="title login">Login Form</div>
+                  <div class="title register">Register Form</div>
+                </div>
+                <div class="form-container">
+                  <div class="slide-controls">
+                    <input type="radio" name="slide" id="login" checked>
+                    <input type="radio" name="slide" id="register">
+                    <label for="login" class="slide login">Login</label>
+                    <label for="register" class="slide register">Register</label>
+                    <div class="slider-tab"></div>
+                  </div>
+                  <div class="form-inner">
+                    <form action="{{ url_for('login') }}" method="post" class="login">
+                      <div class="field">
+                        <input type="email" id="email" name="email" placeholder="Email Address" value="user16@example.com" required>
+                      </div>
+                      <div class="field">
+                        <input type="password" id="password" name="password" placeholder="Password" value="12345" required>
+                      </div>
+                      <div class="pass-link"><a href="{{ url_for('forgot_password') }}">Forgot password?</a></div>
+                      <div class="field btn">
+                        <div class="btn-layer"></div>
+                        <input type="submit" value="Login">
+                      </div>
+                      <div class="register-link">Not a member? <a href="{{ url_for('register') }}">Register now</a></div>
+                    </form>
+
+                    <form action="{{ url_for('register') }}" method="post" class="signup">
+                      <div class="field">
+                        <input type="text" id="username" name="username" placeholder="Username" required>
+                      </div>
+                      <div class="field">
+                        <input type="email" id="email" name="email" placeholder="Email Address" required>
+                      </div>
+                      <div class="field">
+                        <input type="password" id="password" name="password" placeholder="Password" required>
+                      </div>
+                      <div class="field">
+                        <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm password" required>
+                      </div>
+                      <div class="field btn">
+                        <div class="btn-layer"></div>
+                        <input type="submit" value="Register">
+                      </div>
+                      <div class="login-link">Already a member? <a href="">Login now</a></div>
+                    </form>
+                  </div>
+                  <div class="warning-message">
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                      {% if messages %}
+                        <ul class="flashes" id="flashes">
+                          {% for category, message in messages %}
+                            <li class="{{ category }}">{{ message }}</li>
+                          {% endfor %}
+                        </ul>
+                      {% endif %}
+                    {% endwith %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>  
+        </div>
+      </section>   
+          
+      
+    </main><!-- End #main -->
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer">
+
+      <div class="footer-top">
+
+        <div class="row  justify-content-center">
+          <div class="col-lg-6">
+            <h3>HeartGaurd</h3>
+            <p>A Healthy Heart can lead you to long and joyful life.</p>
+          </div>
+        </div>
+
+          <div class="social-links">
+            <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+            <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+            <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+            <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+            <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="container footer-bottom clearfix">
+      </div>
+    </footer>End Footer
+
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+    <!-- Vendor JS Files -->
+    <script src="../static/vendor/purecounter/purecounter_vanilla.js"></script>
+    <script src="../static/vendor/aos/aos.js"></script>
+    <script src="../static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../static/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="../static/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="../static/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="../static/vendor/php-email-form/validate.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="../static/js/main.js"></script>
+    <script>
+      const loginText = document.querySelector(".title-text .login");
+      const loginForm = document.querySelector("form.login");
+      const loginBtn = document.querySelector("label.login");
+      const registerBtn = document.querySelector("label.register");
+      const registerLink = document.querySelector("form .register-link a");
+      const loginLink = document.querySelector("form .login-link a");
+      registerBtn.onclick = (()=>{
+          loginForm.style.marginLeft = "-50%";
+          loginText.style.marginLeft = "-50%";
+      });
+      loginBtn.onclick = (()=>{
+          loginForm.style.marginLeft = "0%";
+          loginText.style.marginLeft = "0%";
+      });
+      registerLink.onclick = (()=>{
+          registerBtn.click();
+          return false;
+      });
+      loginLink.onclick = (()=>{
+          loginBtn.click();
+          return false;
+      });
+        // Hide flash messages after 5 seconds
+      setTimeout(function() {
+          var flashMessage = document.getElementById('flashes');
+          if (flashMessage) {
+              flashMessage.style.display = 'none';
+          }
+      }, 2000); // 2000 milliseconds = 2 seconds
+    </script>
+  </body>
+
+</html>
